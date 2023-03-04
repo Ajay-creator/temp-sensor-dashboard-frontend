@@ -1,0 +1,10 @@
+.container{
+    padding:50px 20px;
+    text-align: center;
+    background:"#ffffff";
+    color:#ffffff;
+}
+.select{
+    background-color: transparent;
+    padding: 2.5px 20px;
+}

@@ -1,0 +1,22 @@
+.card{
+    max-width:350px;
+    min-width:250px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding:20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d1919;
+    color: #FFFFFF;
+    border-radius:8px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.8);
+}
+h1,h2,h3,h4,h5,h6{
+    margin:10px auto;
+}
+
+.card h1{
+    font-size: 48px;
+}
