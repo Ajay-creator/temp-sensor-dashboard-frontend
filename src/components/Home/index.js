@@ -36,7 +36,9 @@ export const Home = () =>{
                 setTodaysTemp(data);
             }
             else{
-                setTodaysTemp(todaysTemp.push(data));
+                if(todaysTemp[todaysTemp.length-1]!==latestTemp){
+                    setTodaysTemp(todaysTemp.push(data));
+                }
             }
         }
         fetch();
