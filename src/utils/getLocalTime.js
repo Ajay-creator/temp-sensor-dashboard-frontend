@@ -10,14 +10,11 @@ export const getLocalTime = () =>{
     // second: '2-digit',
     timeZone: 'Asia/Kolkata'
     };
-    let dateString = now.toLocaleString('en-IN', options)
+    let dateString = now.toLocaleString('en-ZA', options)
     .replace(/\//g,'-') // replace slash with dash
     .replace(/ /g, '_'); // replace spaces with underscores
     
-    let t = dateString.split("-");
-    t.reverse();
-    dateString = t.join("-");
-    dateString+="_00-00-00";
+    dateString+='T00:00:00';
     return dateString;
 }
 

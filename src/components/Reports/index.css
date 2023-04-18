@@ -1,0 +1,14 @@
+.report-container{
+    padding-bottom:50px;
+}
+#print{
+    background-color: #000000;
+    display: block;
+    margin:0 auto;
+}
+
+@media print{
+    .no-print{
+        display: none;
+    }
+}

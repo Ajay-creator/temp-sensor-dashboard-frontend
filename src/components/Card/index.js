@@ -1,5 +1,10 @@
 import React from 'react';
+
+// styles
 import './Card.css'
+
+// utils
+import { changeToIST } from '../../utils/changeToIST';
 
 export const Card = ({props}) => {
     const sensorName = props.sensorNo;
@@ -9,7 +14,7 @@ export const Card = ({props}) => {
 
     return (
         <div className='card'>
-            <h3>{timeStamp}</h3>
+            <h3>{changeToIST(timeStamp)}</h3>
             <h1>{sensorReading} {units}</h1>
             <h3>Sensor-{sensorName}</h3>
         </div>

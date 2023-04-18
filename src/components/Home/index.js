@@ -12,6 +12,8 @@ import { fetchTodaysTemp } from "../../api";
 
 // utils
 import { getLocalTime } from "../../utils/getLocalTime";
+import { changeToIST } from "../../utils/changeToIST";
+import { changeToUTC } from "../../utils/changeToUTC";
 
 export const Home = () =>{
     const [latestTemp, setLatestTemp] = useState({});
@@ -19,9 +21,9 @@ export const Home = () =>{
     const [sensorId,setSensorId] = useState('');
 
     const handleSensorChange = async (sensorId) =>{
-        const lTemp = await fectchLatestTemp()
-        const date = getLocalTime()
-        const tTemps = await fetchTodaysTemp(sensorId,date)
+        const lTemp = await fectchLatestTemp();
+        const date = changeToUTC(getLocalTime());
+        const tTemps = await fetchTodaysTemp(sensorId,date);
         setLatestTemp(lTemp);
         setTodaysTemp(tTemps);
     }
@@ -30,14 +32,14 @@ export const Home = () =>{
         const fetch = async () => {
             const data = await fectchLatestTemp(sensorId);
             setLatestTemp(data);
-            if(todaysTemp.length===0){
-                const date = getLocalTime();
+            if(todaysTemp?.length===0){
+                const date = changeToUTC(getLocalTime());
                 const data = await fetchTodaysTemp(sensorId,date);
                 setTodaysTemp(data);
             }
             else{
-                if(todaysTemp[todaysTemp.length-1]!==latestTemp){
-                    setTodaysTemp(todaysTemp.push(data));
+                if(todaysTemp?.back()!==latestTemp){
+                    setTodaysTemp(todaysTemp?.push(data));
                 }
             }
         }
@@ -54,7 +56,8 @@ export const Home = () =>{
         <div className="container">
             <SensorPicker handleSensorChange={handleSensorChange} changedSensorId={setSensorId}></SensorPicker>
             <Cards latestTemp={latestTemp}/>
-            <Charts todaysTemp={todaysTemp}/>
+            <h1 style={{textAlign:"center"}}>Today's Variations | Date : {changeToIST(getLocalTime()).split(' ')[0]}</h1>
+            <Charts tempData={todaysTemp}/>
         </div>
     )
 }

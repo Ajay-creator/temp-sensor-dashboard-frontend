@@ -9,24 +9,23 @@ import {Bar} from 'react-chartjs-2';
 //styles
 import styles from './Charts.module.css';
 
-// utils
-import { getLocalTime } from '../../utils/getLocalTime';
+//utils
+import { changeToIST } from '../../utils/changeToIST';
 
-export const Charts = ({todaysTemp})=>{
-    if(todaysTemp!==undefined){
-        const timeStamps = todaysTemp.map((temp)=>Object.keys(temp)[0]);
-        const sensors = todaysTemp.length ? todaysTemp[0][timeStamps[0]]:[];
+export const Charts = ({tempData})=>{
+    if(tempData!==undefined){
+        const timeStamps = tempData.map((temp)=>Object.keys(temp)[0]);
+        const sensors = tempData.length ? tempData[0][timeStamps[0]]:[];
         return(
             <div>
-                {todaysTemp.length ? (
+                {tempData.length ? (
                 <div className={styles.container}>
-                    <h1 className={styles.heading}>Today's Variations | Date : {getLocalTime().split("_")[0]}</h1>
                     {sensors.map((e,id) => {
                         return (<Bar
                         data={{
-                            labels: timeStamps,
+                            labels: timeStamps.map((timeStamp)=> changeToIST(timeStamp)),
                             datasets: [{
-                                data: timeStamps.map((timeStamp,idx)=>todaysTemp[idx][timeStamp][id]),
+                                data: timeStamps.map((timeStamp,idx)=>tempData[idx][timeStamp][id]),
                                 label:`sensor-${id+1} temperature`,
                                 borderColor:'#1d1919',
                                 backgroundColor:'#1d1919',
@@ -41,7 +40,7 @@ export const Charts = ({todaysTemp})=>{
                             key={id}
                         />)
                     })}
-                </div>):(<div>{null}</div>)}
+                </div>):(<div style={{textAlign:"center"}}>No Temperature Data Recorded</div>)}
             </div>
         )
     }
