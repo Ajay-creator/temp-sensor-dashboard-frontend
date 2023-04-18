@@ -28,13 +28,10 @@ export const Reports = () =>{
     const sectionRef = useRef(null);
 
     const handleSensorChange = async (sensorId) =>{
-        console.log(fromValue);
-        console.log(toValue);
         const from = changeToUTC(fromValue?.$d);
         const to = changeToUTC(toValue?.$d);
         if(from && to){
             const url = `https://web-production-a0d9.up.railway.app/temp/range/${sensorId}/?from=${from}&to=${to}`;
-            console.log(url);
             const data = await fetchRangeTemp(url);
             setRangeTemp(data);
         }

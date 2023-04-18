@@ -7,7 +7,6 @@ import styles from './Tables.module.css';
 import { changeToIST } from "../../utils/changeToIST";
 
 export const Tables = ({tempData}) => {
-    console.log(tempData);
     const timeStamps = tempData?.map((temp)=>Object.keys(temp)[0]);
     const sensors = tempData?.length ? tempData[0][timeStamps[0]]:[];
     return(

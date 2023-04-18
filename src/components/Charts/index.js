@@ -27,8 +27,8 @@ export const Charts = ({tempData})=>{
                             datasets: [{
                                 data: timeStamps.map((timeStamp,idx)=>tempData[idx][timeStamp][id]),
                                 label:`sensor-${id+1} temperature`,
-                                borderColor:'#1d1919',
-                                backgroundColor:'#1d1919',
+                                borderColor:'#0A4D68',
+                                backgroundColor:'#0A4D68',
                                 fill:true,
                             },
                         ]

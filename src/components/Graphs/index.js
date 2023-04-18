@@ -27,7 +27,6 @@ export const Graphs = () =>{
         const to = changeToUTC(toValue?.$d);
         const url = `https://web-production-a0d9.up.railway.app/temp/range/${sensorId}/?from=${from}&to=${to}`
         const data = await fetchRangeTemp(url);
-        console.log(data);
         setRangeTemp(data);
     }
     return(

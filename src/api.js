@@ -40,7 +40,7 @@ export const fetchTodaysTemp = async (sensorId,date) =>{
 export const fetchRangeTemp = async (url) => {
     try {
         const { data } = await axios.get(url);
-        const tempVals = data.reverse().map((obj)=>{
+        const tempVals = data.map((obj)=>{
             let res = {};
             res[obj.timeStamp] = obj.tempValues;
             return res;
