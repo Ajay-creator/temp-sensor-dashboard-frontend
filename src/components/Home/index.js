@@ -26,6 +26,7 @@ export const Home = () =>{
         const tTemps = await fetchTodaysTemp(sensorId,date);
         setLatestTemp(lTemp);
         setTodaysTemp(tTemps);
+        setSensorId(sensorId);
     }
 
     useEffect(()=>{
@@ -54,7 +55,7 @@ export const Home = () =>{
 
     return(
         <div className="container">
-            <SensorPicker handleSensorChange={handleSensorChange} changedSensorId={setSensorId}></SensorPicker>
+            <SensorPicker handleSensorChange={handleSensorChange} changedSensorId={setSensorId} currentSensorId={sensorId}></SensorPicker>
             <Cards latestTemp={latestTemp}/>
             <h1 style={{textAlign:"center"}}>Today's Variations | Date : {changeToIST(getLocalTime()).split(' ')[0]}</h1>
             <Charts tempData={todaysTemp}/>

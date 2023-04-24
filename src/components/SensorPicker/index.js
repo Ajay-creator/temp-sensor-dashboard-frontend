@@ -9,19 +9,19 @@ import { FormControl, NativeSelect } from '@mui/material';
 // API
 import { fetchSensors } from '../../api';
 
-export const SensorPicker = ({ handleSensorChange, changedSensorId}) =>{
+export const SensorPicker = ({ handleSensorChange, changedSensorId, sensorId}) =>{
     const [sensorIds,setSensorIds] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => {   
         const fetchAPI = async () =>{
             const sensors = await fetchSensors();
                 setSensorIds(sensors);
                 changedSensorId(sensors[0])
                 // console.log(sensors)
         }
-        fetchAPI();
+        if(!sensorId || sensorId === '') fetchAPI();
     // eslint-disable-next-line
-    },[]);
+    },[sensorId]);
 
     return(
         <div className={styles.container}>

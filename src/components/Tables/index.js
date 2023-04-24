@@ -18,7 +18,7 @@ export const Tables = ({tempData}) => {
                         <tr>
                         <th>Date & Time</th>
                         {sensors?.map((e,id)=> {
-                            return (<th key={id}>Sensor - {id+1}</th>)
+                            return (<th key={id}>Sensor - {id+1} (℃)</th>)
                         } )}
                         </tr>
                     </thead>
@@ -29,7 +29,7 @@ export const Tables = ({tempData}) => {
                                 <td>{changeToIST(timeStamp)}</td>
                                 {tempData[id][timeStamp]?.map((temp,id)=>{
                                     return(
-                                        <td key={id}>{temp} ℃</td>
+                                        <td key={id}>{temp}</td>
                                     )
                                 })}
                                 </tr>

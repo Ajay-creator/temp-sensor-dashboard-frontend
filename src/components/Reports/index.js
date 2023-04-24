@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 //components
 import { SensorPicker } from "../SensorPicker";
 import { Tables } from "../Tables";
+import { Excel } from "../Excel";
 
 // api
 import { fetchRangeTemp } from "../../api";
@@ -28,8 +29,13 @@ export const Reports = () =>{
     const sectionRef = useRef(null);
 
     const handleSensorChange = async (sensorId) =>{
+        setSensorId(sensorId);
         const from = changeToUTC(fromValue?.$d);
         const to = changeToUTC(toValue?.$d);
+        if(to<=from){
+            alert('\'Start\' date & time must be less than \'End\' date & time.')
+            return
+        }
         if(from && to){
             const url = `https://web-production-a0d9.up.railway.app/temp/range/${sensorId}/?from=${from}&to=${to}`;
             const data = await fetchRangeTemp(url);
@@ -57,10 +63,12 @@ export const Reports = () =>{
                 <Button variant="contained" color="success" onClick={(e)=>handleSensorChange(sensorId)}>Get Report</Button>
             </Stack>
             <div ref={sectionRef} className="print-sec">
+                <h2 style={{textAlign:"center"}}>SensorID : {sensorId}</h2>
                 <h3 style={{textAlign:"center"}}>Date & Time Range : {`${changeToIST(fromValue?.$d)} - ${changeToIST(toValue?.$d)}`}</h3>
                 <Tables tempData={rangeTemp}/>
             </div>
-            {rangeTemp?.length ? <Button className="no-print" id="print" variant="contained" color="success" onClick={printSection} >Print</Button> : null}
+            {rangeTemp?.length ? <Button className="no-print" id="p-button" variant="contained" color="success" onClick={printSection}>Print</Button> : null}
+            <Excel tempData = {rangeTemp} sensorId={sensorId} fromValue={changeToUTC(fromValue?.$d)} toValue={changeToUTC(toValue?.$d)}/>
         </div>
     )
 }
