@@ -33,16 +33,9 @@ export const Home = () =>{
         const fetch = async () => {
             const data = await fectchLatestTemp(sensorId);
             setLatestTemp(data);
-            if(todaysTemp?.length===0){
-                const date = changeToUTC(getLocalTime());
-                const data = await fetchTodaysTemp(sensorId,date);
-                setTodaysTemp(data);
-            }
-            else{
-                if(todaysTemp?.back()!==latestTemp){
-                    setTodaysTemp(todaysTemp?.push(data));
-                }
-            }
+            const date = changeToUTC(getLocalTime());
+            const todaysData = await fetchTodaysTemp(sensorId,date);
+            setTodaysTemp(todaysData);
         }
         fetch();
         const interval = setInterval(()=>{
